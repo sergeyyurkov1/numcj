@@ -71,11 +71,11 @@ public class N2Darray {
     }
 
     // METHODS
-    public func toString() {
+    public func toString(): String {
         /** Printable representation of the N2Darray
          * @return Internal arrays
          */
-        return this.M.getArray()
+        return this.array.toString()
     }
     public func transpose(): N2Darray {
         /** array.transpose() Transposes the internal matrix
