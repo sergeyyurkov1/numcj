@@ -42,7 +42,7 @@ public class N2Darray {
     }
 
     // PROPERTIES
-    prop shape: (Int64, Int64) {
+    public prop shape: (Int64, Int64) {
         /** array.shape; works as a property
          * @return A tuple of row and column dimensions of the internal matrix
          * @exception "" ""
@@ -51,7 +51,7 @@ public class N2Darray {
             return (this.M.getRowDimension(), this.M.getColumnDimension())
         }
     }
-    prop size: Int64 {
+    public prop size: Int64 {
         /** array.size; works as a property
          * @return The number of total values in the internal matrix
          * @exception "" ""
@@ -60,7 +60,7 @@ public class N2Darray {
             return this.M.getRowDimension() * this.M.getColumnDimension()
         }
     }
-    prop T: N2Darray {
+    public prop T: N2Darray {
         /** array.T Transposes the internal matrix; works as a property
          * @return A new N2Darray with the transposed internal matrix
          * @exception "" ""
