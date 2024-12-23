@@ -12,7 +12,7 @@ type Vector2 = Array<Array<Float64>> // 2D array
 
 type Vector1 = Array<Float64> // 1D array
 
-class Numcj {
+public class Numcj {
     public func zeros(shape: (Int64, Int64)) {
         /** Initializes an N2Darray with zeros.
          * @param shape Controls the shape of the N2Darray: (2, 2) -> [[0.0, 0.0], [0.0, 0.0]]

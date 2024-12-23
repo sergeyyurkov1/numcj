@@ -1,6 +1,6 @@
 package numcj
 
-class N3Darray {
+public class N3Darray {
     var array: Vector3
 
     public init(shape: (Int64, Int64, Int64)) {

@@ -6,7 +6,7 @@ import std.random.*
 
 let r = Random()
 
-class N2Darray {
+public class N2Darray {
     var array: Vector2
     var M: Matrix
 
