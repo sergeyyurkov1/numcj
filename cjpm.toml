@@ -7,7 +7,7 @@
   description = "Numpy alternative for Cangjie"
   link-option = ""
   name = "numcj"
-  output-type = "executable"
+  output-type = "dynamic"
   src-dir = ""
   target-dir = ""
   version = "1.0.0"
