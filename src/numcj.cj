@@ -3,6 +3,7 @@ package numcj
 import matrix4cj.*
 import std.collection.*
 import std.math.*
+import std.random.*
 
 /** Custom type aliases.
  */
@@ -13,6 +14,15 @@ type Vector2 = Array<Array<Float64>> // 2D array
 type Vector1 = Array<Float64> // 1D array
 
 public class Numcj {
+    let random: Random
+
+    public init(seed!: UInt64 = 0) {
+        /** Initializes Numcj and a random number generator.
+         * @param seed (optional) Sets the seed for the random number generator
+         */
+        this.random = Random(seed)
+    }
+
     public func zeros(shape: (Int64, Int64)) {
         /** Initializes an N2Darray with zeros.
          * @param shape Controls the shape of the N2Darray: (2, 2) -> [[0.0, 0.0], [0.0, 0.0]]
@@ -28,7 +38,8 @@ public class Numcj {
          * @return New N2Darray
          * @exception "" ""
          */
-        return N2Darray(shape, random: true)
+        let a = Vector2(shape[0], {_ => Vector1(shape[1], {_ => this.random.nextFloat64()})})
+        return N2Darray(a)
     }
 
     public func dot(a: N2Darray, b: N2Darray) {
@@ -119,5 +130,30 @@ public class Numcj {
     }
     private func sum_(a: Float64, b: Float64) {
         return a + b
+    }
+    public func linspace(start: Float64, stop: Float64, num: Int64, endpoint!: Bool = true): Vector1 {
+        /** Return evenly spaced numbers over a specified interval.
+         * @param start The starting value of the sequence
+         * @param stop The end value of the sequence, unless endpoint is set to False. In that case, the sequence consists of all but the last of num + 1 evenly spaced samples, so that stop is excluded. Note that the step size changes when endpoint is False.
+         * @param num Number of samples to generate
+         * @param endpoint (optional) If true, stop is the last sample. Otherwise, it is not included. Default is true.
+         * @return 1D array of `num` evenly spaced samples, calculated over the interval [start, stop]
+         * @exception "" ""
+         */
+        var s = start
+
+        let a = ArrayList<Float64>([])
+
+        var step = (stop - start) / Float64(num - 1)
+        if (!endpoint) {
+            step = (stop - start) / Float64(num)
+        }
+
+        for (i in 0..num) {
+            a.append(s)
+            s = s + step
+        }
+
+        return a.toArray()
     }
 }

@@ -4,24 +4,17 @@ import matrix4cj.*
 import std.collection.*
 import std.random.*
 
-let r = Random()
-
 public class N2Darray {
     var array: Vector2
     var M: Matrix
 
-    public init(shape: (Int64, Int64), v!: Float64 = 0.0, random!: Bool = false) {
+    public init(shape: (Int64, Int64), v!: Float64 = 0.0) {
         /** Initializes an N2Darray, stores both the matrix and the array to switch between if the matrix doesn't support a particular operation.
          * @param shape Controls the shape of the N2Darray: (2, 2) -> [[0.0, 0.0], [0.0, 0.0]]
          * @param v Controls the default value to initialize N2Darray with
-         * @param random Controls whether to initialize N2Darray with random values
          * @exception "" ""
          */
-        if (random) {
-            this.array = Vector2(shape[0], {_ => Vector1(shape[1], {_ => r.nextFloat64()})})
-        } else {
-            this.array = Vector2(shape[0], {_ => Vector1(shape[1], {_ => v})})
-        }
+        this.array = Vector2(shape[0], {_ => Vector1(shape[1], {_ => v})})
         this.M = Matrix(this.array) // Matrix can only be Array<Array<Float64>>
     }
     public init(a: Vector2) {
@@ -108,6 +101,13 @@ public class N2Darray {
          * @return New N2Darray
          */
         return N2Darray(this.M.minus(that.M))
+    }
+    public operator func -(that: Array<Float64>): N2Darray {
+        /** Array-wise subtraction of an N2Darray and an Array with conversion
+         * @return New N2Darray
+         */
+        let a = Matrix(Vector2(this.array.size, {_ => that}))
+        return N2Darray(this.M.minus(a))
     }
     public operator func *(that: N2Darray): N2Darray {
         /** Array-wise multiplication of two N2Darrays
